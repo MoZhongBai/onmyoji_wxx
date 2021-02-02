@@ -1,0 +1,158 @@
+For 10 
+    Call 主体()
+Next
+TracePrint "妖气封印结束！"
+
+Function 主体()
+	Call 组队()
+	Call 妖气封印()
+	Delay 1000
+	Call 找式神()
+	Delay 2000
+	Call 结算()
+	Call 防封()
+End Function
+
+
+Function 组队()
+	Dim intX,intY
+	Do
+		FindPic 321,568,442,698,"Attachment:组队.bmp","000000",0,0.9,intX,intY
+		If intX > -1 And intY > -1 Then 
+			RandomsTap intX, intY, 10
+			Delay 1000
+			Exit Do
+		End If	
+	Loop
+End Function
+
+
+Function 妖气封印()
+	Dim intX,intY
+	FindPic 123,108,382,672,"Attachment:妖气封印.bmp","000000",0,0.8,intX,intY
+	If intX > -1 And intY > -1 Then
+		RandomsTap intX, intY, 5
+		TracePrint "点击妖气封印"
+	Else 
+		FindPic 123, 108, 382, 672, "Attachment:妖气封印选.bmp", "000000", 0, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then 
+			ShowMessage "已经选中妖气封印~"
+		Else
+			Swipe 262, 385, 262, 125, 500
+			Delay 700
+			Call 妖气封印()
+		End If
+	End If
+End Function
+
+
+Function 找式神()
+	Dim intX,intY
+	FindPic 389,179,591,567,"Attachment:鬼使黑.bmp","000000",0,0.8,intX,intY
+	If intX > -1 And intY > -1 Then
+		RandomsTap intX, intY, 10
+	Else 
+		FindPic 389,179,591,567, "Attachment:鬼使黑选.bmp", "000000", 0, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then 
+			ShowMessage "已经选中鬼使黑~"
+		Else
+			Swipe 499, 363, 499, 188, 500
+			Delay 1500
+			Call 找式神()
+		End If	
+	End If
+	
+	Delay 1000
+
+	FindPic 619,540,969,705,"Attachment:自动匹配.bmp","000000",0,0.8,intX,intY
+	If intX > -1 And intY > -1 Then
+		RandomsTap intX,intY,10
+	End If
+End Function
+
+
+
+
+
+Function 结算()
+	Dim intX,intY
+	Do
+		FindPic 393,7,467,68,"Attachment:排队中.bmp","000000",0,0.9,intX,intY
+		If intX > -1 And intY > -1 Then
+			ShowMessage "妖气封印排队中..."
+			Delay 1000
+		Else 
+			Exit Do
+		End If
+	Loop
+	
+	Delay 6000
+	
+	TracePrint "进入准备界面"
+	
+	Do
+		FindPic 89, 635, 179, 719, "Attachment:准备界面.bmp", "000000", 0, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then 
+			Delay 1000
+			RandomsTap 1166, 550, 10
+			Exit Do
+		End If
+	Loop
+	
+	TracePrint "准备完毕"
+	Delay 3000
+	
+	TracePrint "战斗中..."
+	Do
+		FindPic 150,0,751,414, "Attachment:胜利.bmp", "000000", 0, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then 
+			RandomsTap 605, 550, 10
+			Exit Do
+		End If	
+	Loop
+	
+	TracePrint "胜利"
+	Delay 4000
+	
+	TracePrint "结算中..."
+	Do
+		FindPic 523,478,756,623, "Attachment:结算.bmp", "000000", 0, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then 
+			RandomsTap 605, 650, 10
+			Exit Do
+		End If	
+	Loop
+	
+	TracePrint "结算完成..."
+	
+	Delay 5000
+End Function
+
+Function 防封()
+	Dim intX,intY
+	Do
+		FindPic 808,566,959,697,"Attachment:好友.bmp","000000",0,0.9,intX,intY
+		If intX > -1 And intY > -1 Then 
+			RandomsTap intX, intY, 10
+			Delay 5000
+			Exit Do
+		End If	
+	Loop
+	FindPic 888, 580, 1007, 666, "Attachment:表情包.bmp", "000000", 0, 0.9, intX, intY
+	If intX > -1 And intY > -1 Then 
+		RandomsTap intX,intY,5
+	End If
+	Delay 1500
+	TracePrint "选择图片..."
+	RandomsTap 825, 410, 20
+	Delay 1700
+	Tap 1078, 621
+	Delay 1500
+	Tap 1078, 621
+	Delay 1500
+	FindPic 1119,63,1240,163, "Attachment:叉.bmp", "000000", 0, 0.9, intX, intY
+	If intX > -1 And intY > -1 Then 
+		Tap intX, intY
+	End If
+	Delay 1700
+End Function
